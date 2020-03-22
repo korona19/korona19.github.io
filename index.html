@@ -23,7 +23,7 @@
         $(document).ready(function () {
             main();
         });
-
+        colorPalette = ["rgb(255, 0, 0)", "rgb(153, 0, 0)", "rgb(0, 255, 0)", "rgb(0, 102, 51)"];
         function main() {
             DisplayCountries();
             DisplayGraph();
@@ -62,6 +62,7 @@
             for (i = 1; i <= 11; i++) {
                 data_x.push(i);
             }
+            var colorIndex = 0;
             for (country in displayList) {
                 if (displayList[country].visible == false) {
                     continue;
@@ -69,8 +70,11 @@
                 result.push(
                     {
                         name: country + " - Total Case",
-                        visible:"legendonly",
+                        visible: "legendonly",
                         type: 'scatter',
+                        marker: {
+                            color: colorPalette[colorIndex],
+                        },
                         x: data_x,
                         y: displayList[country].data.totalCase
                     }
@@ -78,8 +82,11 @@
                 result.push(
                     {
                         name: country + " - Total Death",
-                        visible:"legendonly",
+                        visible: "legendonly",
                         type: 'scatter',
+                        marker: {
+                            color: colorPalette[colorIndex + 1],
+                        },
                         x: data_x,
                         y: displayList[country].data.totalDeath
                     }
@@ -88,6 +95,9 @@
                     {
                         name: country + " - New Case",
                         type: 'bar',
+                        marker: {
+                            color: colorPalette[colorIndex],
+                        },
                         x: data_x,
                         y: displayList[country].data.newCase
                     }
@@ -96,10 +106,14 @@
                     {
                         name: country + " - New Death",
                         type: 'bar',
+                        marker: {
+                            color: colorPalette[colorIndex + 1],
+                        },
                         x: data_x,
                         y: displayList[country].data.newDeath
                     }
                 );
+                colorIndex += 2;
             }
             return result;
         }

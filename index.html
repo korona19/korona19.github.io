@@ -69,6 +69,7 @@
                 result.push(
                     {
                         name: country + " - Total Case",
+                        visible:"legendonly",
                         type: 'scatter',
                         x: data_x,
                         y: displayList[country].data.totalCase
@@ -77,6 +78,7 @@
                 result.push(
                     {
                         name: country + " - Total Death",
+                        visible:"legendonly",
                         type: 'scatter',
                         x: data_x,
                         y: displayList[country].data.totalDeath

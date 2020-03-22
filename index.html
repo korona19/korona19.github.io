@@ -3,56 +3,92 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
     <script>
+        var countryList = ["Turkey", "Italy", "China"];
         var displayList = {
-            "turkey": { visible: true, data: [1, 1, 5, 5, 18, 47, 98, 191, 359, 670, 947] },
-            "italy": { visible: false, data: [19, 30, 50, 90, 180, 470, 980, 1910, 2000, 4000, 9470] }
+            "Turkey": { visible: true, data:{totalCase:[1, 1, 5, 5, 18, 47, 98, 191, 359, 670, 947],totalDeath:[0,0,0,0,0,0,0,5,8,10,12], newCase:[1,0,4,0,13,29,90,200,400,300],newDeath:[0,0,0,0,0,0,0,5,3,2,2]}},
+            "Italy": { visible: true, data:{totalCase:[19, 30, 50, 90, 180, 470, 980, 1910, 2000, 4000, 9470],totalDeath:[0,10,30,50,100,300,400,500,800,1000,1500], newCase:[10,30,40,100,300,290,50,200,4000,3000],newDeath:[10,10,10,100,200,300,400,500,300,200,1000]}},
+            "China": { visible: true, data:{totalCase:[190, 300, 500, 900, 1800, 4700, 9800, 19100, 20000, 40000, 94700],totalDeath:[10,20,100,300,400,500,600,700,800,1030,12000], newCase:[100,50,40,30,130,290,900,2000,4000,800],newDeath:[10,0,10,1000,0,2000,100,500,300,2200,2500]}},
         }
         $(document).ready(function () {
             main();
-            displayGraph();
         });
 
         function main() {
+            DisplayCountries();
+            DisplayGraph();
             $(".country").change(function () {
                 displayList[this.value].visible = this.checked;
                 console.log(displayList);
-                displayGraph();
+                DisplayGraph();
             });
-
+            
         }
-        function displayGraph() {
+
+        function DisplayCountries() {
+            countryList.forEach(element => {
+                $("#countries").append('<input type="checkbox" class="country" value="' + element + '" checked><label>' + element + '</label><br>');;
+            });
+        }
+        function CreateGraphData() {
+            result = [];
             var data_x = [];
             for (i = 1; i <= 11; i++) {
                 data_x.push(i);
             }
-            
-            var turkey_graph = displayList.turkey.visible? {
-                x: data_x,
-                y: displayList.turkey.data,
-                type: 'scatter'
-            }:{};
-            var italy_graph = displayList.italy.visible? {
-                x: data_x,
-                y: displayList.italy.data,
-                type: 'scatter'
-            }:{};
+            for(country in displayList)
+            {
+                if (displayList[country].visible == false)
+                {
+                    continue;
+                }
+                result.push(
+                    {
+                        name:country + " - Total Case",
+                        type:'scatter',
+                        x: data_x,
+                        y: displayList[country].data.totalCase
+                    }
+                );
+                result.push(
+                    {
+                        name:country + " - Total Death",
+                        type:'scatter',
+                        x: data_x,
+                        y: displayList[country].data.totalDeath
+                    }
+                );
+                result.push(
+                    {
+                        name:country + " - New Case",
+                        type:'bar',
+                        x: data_x,
+                        y: displayList[country].data.newCase
+                    }
+                );
+                result.push(
+                    {
+                        name:country + " - New Death",
+                        type:'bar',
+                        x: data_x,
+                        y: displayList[country].data.newDeath
+                    }
+                );                
+            }
+            return result;
+        }
 
-            var data = [turkey_graph,italy_graph];
-
-            Plotly.newPlot('myDiv', data);
-
-            console.log("ready!");
-
+        function DisplayGraph() {
+           var graph_data = CreateGraphData();
+            Plotly.newPlot('myDiv', graph_data);
         }
     </script>
 </head>
 
 <body>
+    <div id="countries">
 
-    <input type="checkbox" class="country" value="turkey" checked>
-    <label for="vehicle1"> Turkey </label><br>
-    <input type="checkbox" class="country" value="italy">
-    <label for="vehicle2"> Italy</label><br>
+
+    </div>
     <div id='myDiv'>
         <!-- Plotly chart will be drawn inside this DIV -->
     </div>

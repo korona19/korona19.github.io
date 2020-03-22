@@ -24,6 +24,13 @@
             main();
         });
         colorPalette = ["rgb(255, 0, 0)", "rgb(153, 0, 0)", "rgb(0, 255, 0)", "rgb(0, 102, 51)"];
+
+
+        function GetDateDifference(startDate, endDate)
+        {
+            return Math.ceil(Math.abs(endDate - startDate)/(1000*60*60*24));
+        }
+
         function main() {
             DisplayCountries();
             DisplayGraph();
@@ -57,10 +64,13 @@
             });
         }
         function CreateGraphData() {
-            result = [];
+            var result = [];
+            startDate = new Date(2020,2,11);
             var data_x = [];
-            for (i = 1; i <= 11; i++) {
-                data_x.push(i);
+            for (i = 0; i < 11; i++) {
+                var newDate = new Date(startDate);
+                newDate.setDate(startDate.getDate() + i);
+                data_x.push(newDate);
             }
             var colorIndex = 0;
             for (country in displayList) {

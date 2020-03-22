@@ -26,9 +26,8 @@
         colorPalette = ["rgb(255, 0, 0)", "rgb(153, 0, 0)", "rgb(0, 255, 0)", "rgb(0, 102, 51)"];
 
 
-        function GetDateDifference(startDate, endDate)
-        {
-            return Math.ceil(Math.abs(endDate - startDate)/(1000*60*60*24));
+        function GetDateDifference(startDate, endDate) {
+            return Math.ceil(Math.abs(endDate - startDate) / (1000 * 60 * 60 * 24));
         }
 
         function main() {
@@ -65,7 +64,7 @@
         }
         function CreateGraphData() {
             var result = [];
-            startDate = new Date(2020,2,11);
+            startDate = new Date(2020, 2, 11);
             var data_x = [];
             for (i = 0; i < 11; i++) {
                 var newDate = new Date(startDate);
@@ -130,7 +129,14 @@
 
         function DisplayGraph() {
             var graph_data = CreateGraphData();
-            Plotly.newPlot('myDiv', graph_data);
+            var layout = {
+                title: 'COVID 19',
+                xaxis: {
+                    tickformat: '%d.%m.%y'
+                }
+            };
+
+            Plotly.newPlot('myDiv', graph_data, layout);
         }
     </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->

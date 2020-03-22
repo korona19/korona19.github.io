@@ -4,16 +4,7 @@
     <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
     <script>
         $( document ).ready(function() {
-            console.log( "ready!" );
-        });
-    </script>
-</head>
-
-<body>
-    <div id='myDiv'><!-- Plotly chart will be drawn inside this DIV --></div>
-    <script>
-
-        var data_x = [];
+            var data_x = [];
         for (i=1;i<=11;i++)
          {
             data_x.push(i);
@@ -29,7 +20,13 @@
         var data = [trace1];
         
         Plotly.newPlot('myDiv', data);
-        
-            </script>
+
+            console.log( "ready!" );
+        });
+    </script>
+</head>
+
+<body>
+    <div id='myDiv'><!-- Plotly chart will be drawn inside this DIV --></div>
 	
 </body>

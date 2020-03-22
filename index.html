@@ -17,9 +17,11 @@
         var countryList = ["Turkey", "Italy", "China"];
         var data = {
             "Turkey": { text: "Turkey", startDate: new Date(2020, 2, 11), data: { totalCase: [1, 1, 5, 5, 18, 47, 98, 191, 359, 670, 947], totalDeath: [0, 0, 0, 0, 0, 0, 0, 5, 8, 10, 12], newCase: [1, 0, 4, 0, 13, 29, 90, 200, 400, 300], newDeath: [0, 0, 0, 0, 0, 0, 0, 5, 3, 2, 2] } },
-            "Italy":  { text: "Italy",  startDate: new Date(2020, 1, 22), data: { totalCase: [19, 30, 50, 90, 180, 470, 980, 1910, 2000, 4000, 9470], totalDeath: [0, 10, 30, 50, 100, 300, 400, 500, 800, 1000, 1500], newCase: [10, 30, 40, 100, 300, 290, 50, 200, 4000, 3000], newDeath: [10, 10, 10, 100, 200, 300, 400, 500, 300, 200, 1000] } },
-            "China":  { text: "China",  startDate: new Date(2020, 0, 22), data: { totalCase: [190, 300, 500, 900, 1800, 4700, 9800, 19100, 20000, 40000, 94700], totalDeath: [10, 20, 100, 300, 400, 500, 600, 700, 800, 1030, 12000], newCase: [100, 50, 40, 30, 130, 290, 900, 2000, 4000, 800], newDeath: [10, 0, 10, 1000, 0, 2000, 100, 500, 300, 2200, 2500] } },
+            "Italy": { text: "Italy", startDate: new Date(2020, 1, 22), data: { totalCase: [19, 30, 50, 90, 180, 470, 980, 1910, 2000, 4000, 9470], totalDeath: [0, 10, 30, 50, 100, 300, 400, 500, 800, 1000, 1500], newCase: [10, 30, 40, 100, 300, 290, 50, 200, 4000, 3000], newDeath: [10, 10, 10, 100, 200, 300, 400, 500, 300, 200, 1000] } },
+            "China": { text: "China", startDate: new Date(2020, 0, 22), data: { totalCase: [190, 300, 500, 900, 1800, 4700, 9800, 19100, 20000, 40000, 94700], totalDeath: [10, 20, 100, 300, 400, 500, 600, 700, 800, 1030, 12000], newCase: [100, 50, 40, 30, 130, 290, 900, 2000, 4000, 800], newDeath: [10, 0, 10, 1000, 0, 2000, 100, 500, 300, 2200, 2500] } },
         }
+
+
         var displayingData = [];
         var dateCount = 10;
         var mergeOrigin = false;
@@ -133,7 +135,6 @@
             });
             var colorIndex = 0;
             displayingData.forEach(country => {
-                debugger;
                 result = result.concat(GetCountryGraphData(country, colorIndex));
                 colorIndex += 2;
             });
@@ -156,8 +157,7 @@
                     }
                 }
             };
-            if (mergeOrigin == true)
-            {
+            if (mergeOrigin == true) {
                 delete layout.xaxis.tickformat
             }
 
@@ -196,8 +196,7 @@
     </form>
 
     <input type="checkbox" class="form-check-input" id="mergeOrigin">
-    <div id='totalGraph'>
-    </div>
+    <div id='totalGraph' class="col-md-10 d-flex justify-content-center"></div>
     <div id='percentageGraph'>
     </div>
 

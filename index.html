@@ -1,15 +1,24 @@
 <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
     <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
     <script>
         var countryList = ["Turkey", "Italy", "China"];
         var displayList = {
-            "Turkey": { visible: true, data: { totalCase: [1, 1, 5, 5, 18, 47, 98, 191, 359, 670, 947], totalDeath: [0, 0, 0, 0, 0, 0, 0, 5, 8, 10, 12], newCase: [1, 0, 4, 0, 13, 29, 90, 200, 400, 300], newDeath: [0, 0, 0, 0, 0, 0, 0, 5, 3, 2, 2] } },
-            "Italy": { visible: true, data: { totalCase: [19, 30, 50, 90, 180, 470, 980, 1910, 2000, 4000, 9470], totalDeath: [0, 10, 30, 50, 100, 300, 400, 500, 800, 1000, 1500], newCase: [10, 30, 40, 100, 300, 290, 50, 200, 4000, 3000], newDeath: [10, 10, 10, 100, 200, 300, 400, 500, 300, 200, 1000] } },
-            "China": { visible: true, data: { totalCase: [190, 300, 500, 900, 1800, 4700, 9800, 19100, 20000, 40000, 94700], totalDeath: [10, 20, 100, 300, 400, 500, 600, 700, 800, 1030, 12000], newCase: [100, 50, 40, 30, 130, 290, 900, 2000, 4000, 800], newDeath: [10, 0, 10, 1000, 0, 2000, 100, 500, 300, 2200, 2500] } },
+            "Turkey": { visible: false, data: { totalCase: [1, 1, 5, 5, 18, 47, 98, 191, 359, 670, 947], totalDeath: [0, 0, 0, 0, 0, 0, 0, 5, 8, 10, 12], newCase: [1, 0, 4, 0, 13, 29, 90, 200, 400, 300], newDeath: [0, 0, 0, 0, 0, 0, 0, 5, 3, 2, 2] } },
+            "Italy": { visible: false, data: { totalCase: [19, 30, 50, 90, 180, 470, 980, 1910, 2000, 4000, 9470], totalDeath: [0, 10, 30, 50, 100, 300, 400, 500, 800, 1000, 1500], newCase: [10, 30, 40, 100, 300, 290, 50, 200, 4000, 3000], newDeath: [10, 10, 10, 100, 200, 300, 400, 500, 300, 200, 1000] } },
+            "China": { visible: false, data: { totalCase: [190, 300, 500, 900, 1800, 4700, 9800, 19100, 20000, 40000, 94700], totalDeath: [10, 20, 100, 300, 400, 500, 600, 700, 800, 1030, 12000], newCase: [100, 50, 40, 30, 130, 290, 900, 2000, 4000, 800], newDeath: [10, 0, 10, 1000, 0, 2000, 100, 500, 300, 2200, 2500] } },
         }
         $(document).ready(function () {
             main();
@@ -21,6 +30,23 @@
             $(".country").change(function () {
                 displayList[this.value].visible = this.checked;
                 console.log(displayList);
+                DisplayGraph();
+            });
+            $('.countries').select2({
+                data: countryList,
+                maximumSelectionLength: 2
+
+            });
+            $('#countries').on('select2:close', function (e) {
+                for (element in displayList)
+                {
+                    displayList[element].visible = false;
+                }
+                $('#countries').select2('data').forEach(element => {
+                    console.log(element);
+                    displayList[element.text].visible = true;
+                });
+
                 DisplayGraph();
             });
 
@@ -94,10 +120,8 @@
 </head>
 
 <body>
-    <div id="countries">
-
-
-    </div>
+    <select id="countries" class="countries col-md-12" multiple="multiple">
+    </select>
     <div id='myDiv'>
         <!-- Plotly chart will be drawn inside this DIV -->
     </div>

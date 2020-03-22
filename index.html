@@ -3,30 +3,58 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
     <script>
-        $( document ).ready(function() {
-            var data_x = [];
-        for (i=1;i<=11;i++)
-         {
-            data_x.push(i);
-         }
-        
-        
-        var trace1 = {
-          x: data_x,
-          y: [1,1,5,5,18,47,98,191,359,670,947],
-          type: 'scatter'
-        };
-        
-        var data = [trace1];
-        
-        Plotly.newPlot('myDiv', data);
-
-            console.log( "ready!" );
+        var displayList = {
+            "turkey": { visible: true, data: [1, 1, 5, 5, 18, 47, 98, 191, 359, 670, 947] },
+            "italy": { visible: false, data: [19, 30, 50, 90, 180, 470, 980, 1910, 2000, 4000, 9470] }
+        }
+        $(document).ready(function () {
+            main();
+            displayGraph();
         });
+
+        function main() {
+            $(".country").change(function () {
+                displayList[this.value].visible = this.checked;
+                console.log(displayList);
+                displayGraph();
+            });
+
+        }
+        function displayGraph() {
+            var data_x = [];
+            for (i = 1; i <= 11; i++) {
+                data_x.push(i);
+            }
+            
+            var turkey_graph = displayList.turkey.visible? {
+                x: data_x,
+                y: displayList.turkey.data,
+                type: 'scatter'
+            }:{};
+            var italy_graph = displayList.italy.visible? {
+                x: data_x,
+                y: displayList.italy.data,
+                type: 'scatter'
+            }:{};
+
+            var data = [turkey_graph,italy_graph];
+
+            Plotly.newPlot('myDiv', data);
+
+            console.log("ready!");
+
+        }
     </script>
 </head>
 
 <body>
-    <div id='myDiv'><!-- Plotly chart will be drawn inside this DIV --></div>
-	
+
+    <input type="checkbox" class="country" value="turkey" checked>
+    <label for="vehicle1"> Turkey </label><br>
+    <input type="checkbox" class="country" value="italy">
+    <label for="vehicle2"> Italy</label><br>
+    <div id='myDiv'>
+        <!-- Plotly chart will be drawn inside this DIV -->
+    </div>
+
 </body>

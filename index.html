@@ -16,7 +16,7 @@
     <script>
         var countryList = ["Turkey", "Italy", "China"];
         var displayList = {
-            "Turkey": { visible: false, data: { totalCase: [1, 1, 5, 5, 18, 47, 98, 191, 359, 670, 947], totalDeath: [0, 0, 0, 0, 0, 0, 0, 5, 8, 10, 12], newCase: [1, 0, 4, 0, 13, 29, 90, 200, 400, 300], newDeath: [0, 0, 0, 0, 0, 0, 0, 5, 3, 2, 2] } },
+            "Turkey": { visible: true, data: { totalCase: [1, 1, 5, 5, 18, 47, 98, 191, 359, 670, 947], totalDeath: [0, 0, 0, 0, 0, 0, 0, 5, 8, 10, 12], newCase: [1, 0, 4, 0, 13, 29, 90, 200, 400, 300], newDeath: [0, 0, 0, 0, 0, 0, 0, 5, 3, 2, 2] } },
             "Italy": { visible: false, data: { totalCase: [19, 30, 50, 90, 180, 470, 980, 1910, 2000, 4000, 9470], totalDeath: [0, 10, 30, 50, 100, 300, 400, 500, 800, 1000, 1500], newCase: [10, 30, 40, 100, 300, 290, 50, 200, 4000, 3000], newDeath: [10, 10, 10, 100, 200, 300, 400, 500, 300, 200, 1000] } },
             "China": { visible: false, data: { totalCase: [190, 300, 500, 900, 1800, 4700, 9800, 19100, 20000, 40000, 94700], totalDeath: [10, 20, 100, 300, 400, 500, 600, 700, 800, 1030, 12000], newCase: [100, 50, 40, 30, 130, 290, 900, 2000, 4000, 800], newDeath: [10, 0, 10, 1000, 0, 2000, 100, 500, 300, 2200, 2500] } },
         }
@@ -34,12 +34,10 @@
             });
             $('.countries').select2({
                 data: countryList,
-                maximumSelectionLength: 2
-
+                maximumSelectionLength: 2,
             });
             $('#countries').on('select2:close', function (e) {
-                for (element in displayList)
-                {
+                for (element in displayList) {
                     displayList[element].visible = false;
                 }
                 $('#countries').select2('data').forEach(element => {
@@ -49,6 +47,7 @@
 
                 DisplayGraph();
             });
+            $('#countries').val('Turkey').trigger('change'); // Notify any JS components that the value changed
 
         }
 

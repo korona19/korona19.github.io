@@ -175,6 +175,7 @@
             var graph_data = CreateGraphData();
             var layout = {
                 title: 'COVID 19 Daily Data',
+                height:380,
                 xaxis: {
                     tickformat: '%d.%m.%y',
                     title: {
@@ -208,35 +209,28 @@
 </head>
 
 <body>
-    <div class="jumbotron">
+    <div class="jumbotron" style="padding-top: 20px;">
         <div class="mx-auto col-md-2">
             <h1 class="display-4 ">Korona 19</h1>
         </div>
         <div class="mx-auto col-md-2">
             <p class="lead">Covid 19 statistical data</p>
         </div>
-        <hr class="my-10">
+        <hr class="my-2">
 
 
         <div class="form-group mx-auto col-md-8">
             <form>
                 <div class="row">
                     <div class="col-md-8">
-                        <label class="form-check-label">Countries</label>
+                        <label class="form-check-label font-weight-bold" style="margin-right: 10px;">Countries:</label>
+                        <select id="countries" class="countries col-md-10" multiple="multiple"></select>
                     </div>
                     <div class="col-md-2">
-                        <label class="form-check-label">Day</label>
+                        <label class="form-check-label font-weight-bold" style="margin-right: 20px;">Day:</label><input type="number" class="form-number-input col-md-6" id="dateCount" value="10" disabled=true/>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-8">
-                        <select id="countries" class="countries col-md-12" multiple="multiple"></select>
-                    </div>
-                    <div class="col-md-2">
-                        <input type="number" class="form-number-input col-md-6" id="dateCount" value="10" disabled=true/>
-                    </div>
-                    <div class="col-md-2">
-                        <input type="checkbox" class="form-check-input" id="mergeOrigin"/> <label class="form-check-label">Merge Origin</label>
+                    <div class="col-md-2" style="padding-top:5px">
+                        <input type="checkbox" class="form-check-input" id="mergeOrigin"/> <label class="form-check-label font-weight-bold">Merge Origin</label>
                     </div>
                 </div>
 
@@ -246,7 +240,7 @@
         </div>
         
         <div id='totalGraph' class="row col-md-10 mx-auto d-flex justify-content-center"></div>
-        <div id='speedGraph' class="row col-md-10 mx-auto d-flex justify-content-center mt-10" style="margin-top: 50px;"></div>
+        <div id='speedGraph' class="row col-md-10 mx-auto d-flex justify-content-center"></div>
 
 
     </div>

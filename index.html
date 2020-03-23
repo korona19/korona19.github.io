@@ -65,7 +65,7 @@
 
         function main() {
             $('#countries').select2({
-                data: countryList,
+                data: countryList
             });
             $('#countries').on('select2:close', function (e) {
                 DisplayGraph();
@@ -88,6 +88,7 @@
                 dateCount = parseInt(this.value);
                 DisplayGraph();
             });
+            $(".select2-selection__rendered").css("height","36px");
             DisplayGraph();
         }
 
@@ -216,7 +217,7 @@
             <h3 style="margin: 0;">Korona 19</h3>
         </div>
         <div class="mx-auto col-md-2">
-            <p class="lead">covid 19 statistical data</p>
+            <p class="lead" style="margin-bottom: 0px;">covid 19 statistical data</p>
         </div>
         <hr class="my-2">
 
@@ -226,7 +227,7 @@
                 <div class="row">
                     <div class="col-md-8">
                         <label class="form-check-label font-weight-bold" style="margin-right: 10px;">Countries:</label>
-                        <select id="countries" class="countries col-md-10" multiple="multiple"></select>
+                        <select id="countries" class="col-md-10" multiple="multiple"></select>
                     </div>
                     <div class="col-md-2">
                         <label class="form-check-label font-weight-bold" style="margin-right: 20px;">Day:</label><input type="number" class="form-number-input col-md-6" id="dateCount" value="10" disabled=true/>

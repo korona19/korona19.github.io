@@ -38,7 +38,7 @@ function main() {
 		dateCount = parseInt(this.value);
 		DisplayGraph();
 	});
-	$(".select2-selection__rendered").css("height","36px");
+	$(".select2-selection__rendered").css("min-height","36px");
 	
 	DisplayGraph();
 }

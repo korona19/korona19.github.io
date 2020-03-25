@@ -39,6 +39,7 @@ function main() {
 		DisplayGraph();
 	});
 	$(".select2-selection__rendered").css("height","36px");
+	
 	DisplayGraph();
 }
 
@@ -155,6 +156,6 @@ function boxFormat(state)
 	{
 		return state.text;
 	}
-	var _state = $("<span class='f16'><span class='flag "+flagCodes[state.text]+"' style='margin-top:3px;'></span><span class='font-weight-bold' style='padding-left:5px;'>"+state.text+"</span></span>");
+	var _state = $("<span class='f32'><span class='flag "+flagCodes[state.text]+"' style='margin-top:-4px;height:28px;'></span><span class='font-weight-bold' style='padding-left:5px;'>"+state.text+"</span></span>");
 	return _state;
 }

@@ -233,7 +233,7 @@ var flagCodes = {
 	"Ukraine":"Ua",
 	"United Arab Emirates":"Ae",
 	"United Kingdom":"Gb",
-	"United States":"Us",
+	"USA":"Us",
 	"United States Minor Outlying Islands":"Um",
 	"Uruguay":"Uy",
 	"Uzbekistan":"Uz",

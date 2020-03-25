@@ -127,7 +127,7 @@ function DisplayGraph() {
 	var graph_data = CreateGraphData();
 	var layout = {
 		title: 'COVID 19 Daily Data',
-		height:750,
+		height:780,
 		plot_bgcolor:"#e9ecef",
 		paper_bgcolor:"#e9ecef",
 		xaxis: {
@@ -147,7 +147,6 @@ function DisplayGraph() {
 	}
 	Plotly.newPlot('totalGraph', graph_data, layout);
 	layout.title = "COVID 19 Speed Graph";
-	Plotly.newPlot('speedGraph', graph_data, layout);
 }
 
 function boxFormat(state)

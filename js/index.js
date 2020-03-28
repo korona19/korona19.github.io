@@ -2,7 +2,6 @@ countryList.sort((a, b) => {
 	return a > b ? 1 : a < b ? -1 : 0;
 });
 var displayingData = [];
-var dateCount = 10;
 var mergeOrigin = false;
 $(document).ready(function () {
 	main();
@@ -22,24 +21,11 @@ function main() {
 	});
 	$('#countries').val('Turkey').trigger('change'); // Notify any JS components that the value changed
 	$("#mergeOrigin").change(function () {
-		if (this.checked == false) {
-			$("#dateCount").prop('disabled', true);
-		}
-		else {
-			$("#dateCount").prop('disabled', false);
-		}
 		mergeOrigin = this.checked;
 		DisplayGraph();
 	});
-	$("#dateCount").change(function () {
-		if (this.value < 10) {
-			this.value = 10;
-		}
-		dateCount = parseInt(this.value);
-		DisplayGraph();
-	});
 	$(".select2-selection__rendered").css("min-height","36px");
-
+	
 	DisplayGraph();
 }
 
@@ -48,7 +34,6 @@ function GetCountryGraphData(country, colorIndex) {
 	var data_x = [];
 	var sampleCount = country.data.totalCase.length;
 	if (mergeOrigin == true) {
-		sampleCount = dateCount < sampleCount ? dateCount : sampleCount;
 		for (var i = 1; i <= sampleCount; i++) {
 			data_x.push(i);
 		}
@@ -126,9 +111,10 @@ function CreateGraphData() {
 function DisplayGraph() {
 	var graph_data = CreateGraphData();
 	var layout = {
-		height:800,
-		plot_bgcolor:"#ffffff",
-		paper_bgcolor:"#ffffff",
+		title: 'COVID 19 Daily Data',
+		height:760,
+		plot_bgcolor:"#e9ecef",
+		paper_bgcolor:"#e9ecef",
 		xaxis: {
 			tickformat: '%d.%m.%y',
 			title: {

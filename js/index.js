@@ -129,19 +129,21 @@ function DisplayGraph() {
 			tickformat: '%d.%m.%y',
 			title: {
 				text: "Date"
-			}
+			},
+			fixedrange: true
 		},
 		yaxis: {
 			title: {
 				text: "Person"
-			}
+			},
+			fixedrange: true
 		},
 		showlegend: false
 	};
 	if (mergeOrigin == true) {
 		delete layout.xaxis.tickformat
 	}
-	Plotly.newPlot('totalGraph', graph_data, layout,{scrollZoom:false,staticPlot: true, responsive: true});
+	Plotly.newPlot('totalGraph', graph_data, layout,{ responsive: true,displaylogo: false});
 	layout.title = "COVID 19 Speed Graph";
 }
 

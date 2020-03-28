@@ -269,7 +269,7 @@ var colorPalette = {
 	"Ireland":"#FF7700",
 	"Israel":"#0080FF",
 	"Italy":"#3ECD01",
-	"South Korea":"#9C0852",
+	"South Korea":"#648CCC",
 	"Netherlands":"#B34E00",
 	"Philippines":"#FD84FD",
 	"Poland":"#766876",

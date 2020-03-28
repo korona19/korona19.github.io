@@ -7,7 +7,8 @@ var legendOptions = [
 	{ text: "Total Case", property: "totalCase", plotType: "scatter" },
 	{ text: "Total Death", property: "totalDeath", plotType: "scatter" },
 	{ text: "New Case", property: "newCase", plotType: "bar" },
-	{ text: "New Death", property: "newDeath", plotType: "bar" }
+	{ text: "New Death", property: "newDeath", plotType: "bar" },
+	{ text: "Case Increase Rate", property: "increaseRate", plotType: "bar" }
 ];
 var selectedLegend = 0;
 
@@ -53,7 +54,7 @@ function main() {
 			$("#mergeOrigin").html("Merge");
 		}
 		DisplayGraph();
-	});	
+	});
 	$("#plotLegend").change(() => {
 		selectedLegend = parseInt($("#plotLegend").val());
 		DisplayGraph();

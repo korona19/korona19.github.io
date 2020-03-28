@@ -126,7 +126,6 @@ function CreateGraphData() {
 function DisplayGraph() {
 	var graph_data = CreateGraphData();
 	var layout = {
-		title: 'COVID 19 Daily Data',
 		height:780,
 		plot_bgcolor:"#ffffff",
 		paper_bgcolor:"#ffffff",

@@ -145,7 +145,7 @@ function DisplayGraph() {
 	if (mergeOrigin == true) {
 		delete layout.xaxis.tickformat
 	}
-	Plotly.newPlot('totalGraph', graph_data, layout);
+	Plotly.newPlot('totalGraph', graph_data, layout,{scrollZoom:false,staticPlot: true, responsive: true});
 	layout.title = "COVID 19 Speed Graph";
 }
 

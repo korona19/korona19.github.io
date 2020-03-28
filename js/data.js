@@ -1,4 +1,4 @@
-var countryList = ["Turkey", "China", "Italy", "Spain", "USA", "Germany", "Iran", "France", "South Korea", "Switzerland", "England", "Netherlands", "Belgium", "Austria", "Norway", "Sweden", "Portugal", "Denmark", "Canada", "Malaysia", "Australia", "Brazil", "Ireland", "Poland", "Greece", "Indonesia", "Philippines", "Hong Kong", "Iraq", "Algeria"];
+var countryList = ["Turkey", "China", "Italy", "Spain", "USA", "Germany", "Iran", "France", "South Korea", "Switzerland", "England", "Netherlands", "Belgium", "Austria", "Norway", "Sweden", "Portugal", "Denmark", "Canada", "Malaysia", "Australia", "Brazil", "Ireland", "Poland", "Greece", "Indonesia", "Philippines", "Hong Kong", "Iraq", "Algeria","Israel","India"];
 var data = {
     "China": {
         data: {
@@ -289,5 +289,25 @@ var data = {
         },
         startDate: new Date(2020, 1, 15),
         text: "Turkey"
+    },
+    "Israel": {
+        data: {
+            totalCase: [0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 2, 2, 3, 6, 6, 9, 11, 11, 14, 15, 19, 22, 36, 46, 71, 93, 105, 139, 189, 209, 294, 326, 422, 663, 689, 846, 1033, 1400, 1874, 2306, 2617, 2944],
+            newCase: [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 3, 2, 0, 3, 2, 4, 4, 14, 11, 25, 22, 12, 34, 50, 20, 85, 39, 96, 244, 28, 178, 188, 371, 488, 439, 324, 342],
+            totalDeath: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 3, 5, 8, 12],
+            newDeath: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 2, 3, 4]
+        },
+        startDate: new Date(2020, 1, 15),
+        text: "Israel"
+    },
+    "India": {
+        data: {
+            totalCase: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 4, 26, 27, 28, 31, 37, 43, 58, 58, 69, 70, 88, 99, 114, 126, 152, 170, 221, 304, 365, 455, 486, 602, 662, 794],
+            newCase: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 22, 1, 1, 3, 6, 7, 15, 0, 12, 8, 18, 14, 15, 14, 26, 25, 55, 83, 64, 103, 37, 121, 70, 160],
+            totalDeath: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 2, 2, 2, 3, 3, 4, 5, 5, 7, 10, 10, 12, 20, 20],
+            newDeath: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0, 2, 3, 0, 2, 8, 0]
+        },
+        startDate: new Date(2020, 1, 15),
+        text: "India"
     }
 }

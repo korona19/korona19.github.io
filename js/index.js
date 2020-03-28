@@ -12,6 +12,7 @@ colorPalette = ["rgb(255, 0, 0)", "rgb(153, 0, 0)", "rgb(0, 255, 0)", "rgb(0, 10
 
 function main() {
 	$('#countries').select2({
+		width: 'resolve',
 		data: countryList,
 		templateResult:boxFormat,
 		templateSelection:boxFormat
@@ -20,8 +21,22 @@ function main() {
 		DisplayGraph();
 	});
 	$('#countries').val('Turkey').trigger('change'); // Notify any JS components that the value changed
-	$("#mergeOrigin").change(function () {
-		mergeOrigin = this.checked;
+	$("#mergeOrigin").click(()=>{
+		mergeOrigin = !mergeOrigin;
+		if (mergeOrigin)
+		{
+			//Split
+			$("#mergeOrigin").removeClass("btn-primary");
+			$("#mergeOrigin").addClass("btn-danger");
+			$("#mergeOrigin").html("Split");
+		}
+		else
+		{
+			//Merge
+			$("#mergeOrigin").addClass("btn-primary");
+			$("#mergeOrigin").removeClass("btn-danger");
+			$("#mergeOrigin").html("Merge");
+		}
 		DisplayGraph();
 	});
 	$(".select2-selection__rendered").css("min-height","36px");

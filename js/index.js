@@ -4,19 +4,19 @@ countryList.sort((a, b) => {
 var displayingData = [];
 var mergeOrigin = false;
 var legendOptions = [
-	{text:"Total Case", property:"totalCase",plotType:"scatter"},
-	{text:"Total Death", property:"totalDeath",plotType:"scatter"},
-	{text:"New Case", property:"newCase",plotType:"bar"},
-	{text:"New Death", property:"newDeath",plotType:"bar"}
+	{ text: "Total Case", property: "totalCase", plotType: "scatter" },
+	{ text: "Total Death", property: "totalDeath", plotType: "scatter" },
+	{ text: "New Case", property: "newCase", plotType: "bar" },
+	{ text: "New Death", property: "newDeath", plotType: "bar" }
 ];
 var selectedLegend = 0;
 
-String.prototype.format = function() {
-    var formatted = this;
-    for( var arg in arguments ) {
-        formatted = formatted.replace("{" + arg + "}", arguments[arg]);
-    }
-    return formatted;
+String.prototype.format = function () {
+	var formatted = this;
+	for (var arg in arguments) {
+		formatted = formatted.replace("{" + arg + "}", arguments[arg]);
+	}
+	return formatted;
 };
 
 $(document).ready(function () {
@@ -31,51 +31,46 @@ function main() {
 		placeholder: "Select Country",
 		width: '100%',
 		data: countryList,
-		templateResult:boxFormat,
-		templateSelection:boxFormat
+		templateResult: BoxFormat,
+		templateSelection: SelectedBoxFormat
 	});
 	$('#countries').on('select2:close', function (e) {
 		DisplayGraph();
 	});
 	$('#countries').val('Turkey').trigger('change'); // Notify any JS components that the value changed
-	$("#mergeOrigin").click(()=>{
+	$("#mergeOrigin").click(() => {
 		mergeOrigin = !mergeOrigin;
-		if (mergeOrigin)
-		{
+		if (mergeOrigin) {
 			//Split
 			$("#mergeOrigin").removeClass("btn-primary");
 			$("#mergeOrigin").addClass("btn-danger");
 			$("#mergeOrigin").html("Split");
 		}
-		else
-		{
+		else {
 			//Merge
 			$("#mergeOrigin").addClass("btn-primary");
 			$("#mergeOrigin").removeClass("btn-danger");
 			$("#mergeOrigin").html("Merge");
 		}
 		DisplayGraph();
-	});
-	$(".select2-selection__rendered").css("min-height","36px");
-	$("#plotLegend").change(()=>{
+	});	
+	$("#plotLegend").change(() => {
 		selectedLegend = parseInt($("#plotLegend").val());
 		DisplayGraph();
 	});
 	DisplayGraph();
 }
 
-function AppendLegendOptions()
-{
+function AppendLegendOptions() {
 	let rootNode = $("#plotLegend");
-	for (let i = 0; i< legendOptions.length;i++)
-	{
-		let html = '<option value= {0}> {1} </option>'.format(i,legendOptions[i].text);
+	for (let i = 0; i < legendOptions.length; i++) {
+		let html = '<option value= {0}> {1} </option>'.format(i, legendOptions[i].text);
 		rootNode.append(html);
 	}
 }
 
 
-function GetCountryGraphData(country, colorIndex) {
+function GetCountryGraphData(country, color) {
 	var country_graph = [];
 	var data_x = [];
 	let legend = legendOptions[selectedLegend]
@@ -97,6 +92,9 @@ function GetCountryGraphData(country, colorIndex) {
 			name: "{0} - {1}".format(country.text, legend.text),
 			visible: true,
 			type: legend.plotType,
+			marker: {
+				color: colorPalette[country.text],
+			},
 			x: data_x,
 			y: country.data[legend.property].slice(0, sampleCount)
 		}
@@ -122,9 +120,9 @@ function DisplayGraph() {
 	var graph_data = CreateGraphData();
 	var layout = {
 		title: '',
-		height:760,
-		plot_bgcolor:"#ffffff",
-		paper_bgcolor:"#ffffff",
+		height: 760,
+		plot_bgcolor: "#ffffff",
+		paper_bgcolor: "#ffffff",
 		xaxis: {
 			tickformat: '%d.%m.%y',
 			title: {
@@ -143,16 +141,24 @@ function DisplayGraph() {
 	if (mergeOrigin == true) {
 		delete layout.xaxis.tickformat
 	}
-	Plotly.newPlot('totalGraph', graph_data, layout,{ responsive: true,displaylogo: false});
+	Plotly.newPlot('totalGraph', graph_data, layout, { responsive: true, displaylogo: false });
 	layout.title = "COVID 19 Speed Graph";
 }
 
-function boxFormat(state)
-{
-	if (!state.id)
-	{
+function SelectedBoxFormat(state) {
+	if (!state.id) {
 		return state.text;
 	}
-	var _state = $("<span class='f32'><span class='flag "+flagCodes[state.text]+"' style='margin-top:-4px;height:28px;'></span><span class='font-weight-bold' style='padding-left:5px;'>"+state.text+"</span></span>");
+	var _state = $("<span class='f32' style><span class='flag {0}' style='margin-top:-4px;height:28px;'></span><span class='font-weight-bold' style='padding-left:5px;color:{1};text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;'>{2}</span></span>"
+				    .format(flagCodes[state.text],colorPalette[state.text],state.text));
+	return _state;
+}
+
+function BoxFormat(state) {
+	if (!state.id) {
+		return state.text;
+	}
+	var _state = $("<span class='f32' style><span class='flag {0}' style='margin-top:-4px;height:28px;'></span><span class='font-weight-bold' style='padding-left:5px;'>{1}</span></span>"
+				    .format(flagCodes[state.text],state.text));
 	return _state;
 }

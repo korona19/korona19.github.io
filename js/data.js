@@ -1,4 +1,4 @@
-var countryList = ["Turkey", "China", "Italy", "Spain", "USA", "Germany", "Iran", "France", "South Korea", "Switzerland", "England", "Netherlands", "Belgium", "Austria", "Norway", "Sweden", "Portugal", "Denmark", "Canada", "Malaysia", "Australia", "Brazil", "Ireland", "Poland", "Greece", "Indonesia", "Philippines", "Hong Kong", "Iraq", "Algeria","Israel","India"];
+var countryList = ["Turkey", "China", "Italy", "Spain", "USA", "Germany", "Iran", "France", "South Korea", "Switzerland", "England", "Netherlands", "Belgium", "Austria", "Norway", "Sweden", "Portugal", "Denmark", "Canada", "Malaysia", "Australia", "Brazil", "Ireland", "Poland", "Greece", "Indonesia", "Philippines", "Hong Kong", "Iraq", "Algeria", "Israel", "India"];
 var data = {
     "China": {
         data: {

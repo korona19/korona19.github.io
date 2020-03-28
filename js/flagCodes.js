@@ -277,7 +277,7 @@ var colorPalette = {
 	"Spain":"#B95B09",
 	"Sweden":"#0E9451",
 	"Switzerland":"#724D56",
-	"Turkey":"#F20000",
+	"Turkey":"#B80C00",
 	"England":"#0745D5",
 	"USA":"#FF0044",
 };

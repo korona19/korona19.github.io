@@ -12,7 +12,8 @@ colorPalette = ["rgb(255, 0, 0)", "rgb(153, 0, 0)", "rgb(0, 255, 0)", "rgb(0, 10
 
 function main() {
 	$('#countries').select2({
-		width: 'resolve',
+		placeholder: "Select Country",
+		width: '100%',
 		data: countryList,
 		templateResult:boxFormat,
 		templateSelection:boxFormat

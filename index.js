@@ -12,7 +12,8 @@ colorPalette = ["rgb(255, 0, 0)", "rgb(153, 0, 0)", "rgb(0, 255, 0)", "rgb(0, 10
 
 function main() {
 	$('#countries').select2({
-		width: 'resolve',
+		placeholder: "Select Country",
+		width: '100%',
 		data: countryList,
 		templateResult:boxFormat,
 		templateSelection:boxFormat
@@ -145,7 +146,7 @@ function DisplayGraph() {
 	if (mergeOrigin == true) {
 		delete layout.xaxis.tickformat
 	}
-	Plotly.newPlot('totalGraph', graph_data, layout,{scrollZoom:false,staticPlot: true});
+	Plotly.newPlot('totalGraph', graph_data, layout,{scrollZoom:false,staticPlot: true, responsive: true});
 	layout.title = "COVID 19 Speed Graph";
 }
 

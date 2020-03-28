@@ -291,5 +291,3 @@ var data = {
         text: "Turkey"
     }
 }
- 
-}

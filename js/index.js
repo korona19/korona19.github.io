@@ -128,8 +128,8 @@ function DisplayGraph() {
 	var layout = {
 		title: 'COVID 19 Daily Data',
 		height:780,
-		plot_bgcolor:"#e9ecef",
-		paper_bgcolor:"#e9ecef",
+		plot_bgcolor:"#ffffff",
+		paper_bgcolor:"#ffffff",
 		xaxis: {
 			tickformat: '%d.%m.%y',
 			title: {

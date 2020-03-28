@@ -39,7 +39,7 @@ function main() {
 		DisplayGraph();
 	});
 	$(".select2-selection__rendered").css("min-height","36px");
-	
+
 	DisplayGraph();
 }
 
@@ -126,7 +126,7 @@ function CreateGraphData() {
 function DisplayGraph() {
 	var graph_data = CreateGraphData();
 	var layout = {
-		height:780,
+		height:800,
 		plot_bgcolor:"#ffffff",
 		paper_bgcolor:"#ffffff",
 		xaxis: {

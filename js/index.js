@@ -149,7 +149,7 @@ function SelectedBoxFormat(state) {
 	if (!state.id) {
 		return state.text;
 	}
-	var _state = $("<span class='f32' style><span class='flag {0}' style='margin-top:-4px;height:28px;'></span><span class='font-weight-bold' style='padding-left:5px;color:{1};text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;'>{2}</span></span>"
+	var _state = $("<span class='f32' style><span class='flag {0}' style='margin-top:-4px;height:28px;'></span><span class='font-weight-bold' style='padding-left:5px;color:{1};'>{2}</span></span>"
 				    .format(flagCodes[state.text],colorPalette[state.text],state.text));
 	return _state;
 }

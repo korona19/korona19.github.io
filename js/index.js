@@ -8,7 +8,9 @@ var legendOptions = [
 	{ text: "Total Death", property: "totalDeath", plotType: "scatter" },
 	{ text: "New Case", property: "newCase", plotType: "bar" },
 	{ text: "New Death", property: "newDeath", plotType: "bar" },
-	{ text: "Case Increase Rate", property: "increaseRate", plotType: "bar" }
+	{ text: "Daily Case Increase", property: "increaseRate", plotType: "bar" },
+	{ text: "Increase Change Ratio", property: "accRate", plotType: "bar" },
+	{ text: "Total Death/Case", property: "deathRate", plotType: "scatter" }
 ];
 var selectedLegend = 0;
 

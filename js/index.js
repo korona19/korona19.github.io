@@ -3,14 +3,30 @@ countryList.sort((a, b) => {
 });
 var displayingData = [];
 var mergeOrigin = false;
+var legendOptions = [
+	{text:"Total Case", property:"totalCase",plotType:"scatter"},
+	{text:"Total Death", property:"totalDeath",plotType:"scatter"},
+	{text:"New Case", property:"newCase",plotType:"bar"},
+	{text:"New Death", property:"newDeath",plotType:"bar"}
+];
+var selectedLegend = 0;
+
+String.prototype.format = function() {
+    var formatted = this;
+    for( var arg in arguments ) {
+        formatted = formatted.replace("{" + arg + "}", arguments[arg]);
+    }
+    return formatted;
+};
+
 $(document).ready(function () {
 	main();
 });
-colorPalette = ["rgb(255, 0, 0)", "rgb(153, 0, 0)", "rgb(0, 255, 0)", "rgb(0, 102, 51)"];
 
 
 
 function main() {
+	AppendLegendOptions();
 	$('#countries').select2({
 		placeholder: "Select Country",
 		width: '100%',
@@ -41,14 +57,29 @@ function main() {
 		DisplayGraph();
 	});
 	$(".select2-selection__rendered").css("min-height","36px");
-	
+	$("#plotLegend").change(()=>{
+		selectedLegend = parseInt($("#plotLegend").val());
+		DisplayGraph();
+	});
 	DisplayGraph();
 }
+
+function AppendLegendOptions()
+{
+	let rootNode = $("#plotLegend");
+	for (let i = 0; i< legendOptions.length;i++)
+	{
+		let html = '<option value= {0}> {1} </option>'.format(i,legendOptions[i].text);
+		rootNode.append(html);
+	}
+}
+
 
 function GetCountryGraphData(country, colorIndex) {
 	var country_graph = [];
 	var data_x = [];
-	var sampleCount = country.data.totalCase.length;
+	let legend = legendOptions[selectedLegend]
+	var sampleCount = country.data[legend.property].length;
 	if (mergeOrigin == true) {
 		for (var i = 1; i <= sampleCount; i++) {
 			data_x.push(i);
@@ -63,48 +94,11 @@ function GetCountryGraphData(country, colorIndex) {
 	}
 	country_graph.push(
 		{
-			name: country.text + " - Total Case",
-			visible: "legendonly",
-			type: 'scatter',
-			// marker: {
-			//     color: colorPalette[colorIndex],
-			// },
+			name: "{0} - {1}".format(country.text, legend.text),
+			visible: true,
+			type: legend.plotType,
 			x: data_x,
-			y: country.data.totalCase.slice(0, sampleCount)
-		}
-	);
-	country_graph.push(
-		{
-			name: country.text + " - Total Death",
-			visible: "legendonly",
-			type: 'scatter',
-			// marker: {
-			//     color: colorPalette[colorIndex + 1],
-			// },
-			x: data_x,
-			y: country.data.totalDeath.slice(0, sampleCount)
-		}
-	);
-	country_graph.push(
-		{
-			name: country.text + " - New Case",
-			type: 'bar',
-			// marker: {
-			//     color: colorPalette[colorIndex],
-			// },
-			x: data_x,
-			y: country.data.newCase.slice(0, sampleCount)
-		}
-	);
-	country_graph.push(
-		{
-			name: country.text + " - New Death",
-			type: 'bar',
-			// marker: {
-			//     color: colorPalette[colorIndex + 1],
-			// },
-			x: data_x,
-			y: country.data.newDeath.slice(0, sampleCount)
+			y: country.data[legend.property].slice(0, sampleCount)
 		}
 	);
 	return country_graph;
@@ -129,8 +123,8 @@ function DisplayGraph() {
 	var layout = {
 		title: 'COVID 19 Daily Data',
 		height:760,
-		plot_bgcolor:"#e9ecef",
-		paper_bgcolor:"#e9ecef",
+		plot_bgcolor:"#ffffff",
+		paper_bgcolor:"#ffffff",
 		xaxis: {
 			tickformat: '%d.%m.%y',
 			title: {
@@ -141,7 +135,8 @@ function DisplayGraph() {
 			title: {
 				text: "Person"
 			}
-		}
+		},
+		showlegend: false
 	};
 	if (mergeOrigin == true) {
 		delete layout.xaxis.tickformat

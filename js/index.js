@@ -196,6 +196,7 @@ function DisplayGraph() {
          {
 			 $("body").text("");
 			 $("body").append("<img src=\"{0}\"></img>".format(url));
+			 $("head").append('<meta name = "twitter:image" id="twitter_image" content="{0}">'.format(window.location.href));
          }
          )			 
 			 

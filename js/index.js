@@ -84,7 +84,7 @@ function GetCountryGraphData(country, color) {
 	if (mergeOrigin == true) {
 		for (var i = 1; i <= sampleCount; i++) {
 			data_x.push(i);
-			if (i % 5 == 0)
+			if (i % 5 == 0 || i == sampleCount -1)
 			{
 				textArr.push(annotationTemplate(country.data[legend.property][i]));
 			}
@@ -99,7 +99,7 @@ function GetCountryGraphData(country, color) {
 			var newDate = new Date(country.startDate);
 			newDate.setDate(country.startDate.getDate() + i);
 			data_x.push(newDate);
-			if (i % 5 == 0)
+			if (i % 5 == 0 || i == sampleCount -1)
 			{
 				textArr.push(annotationTemplate(country.data[legend.property][i]));
 			}
@@ -109,7 +109,7 @@ function GetCountryGraphData(country, color) {
 			}
 		}
 	}
-	textArr[textArr.length - 1] = annotationTemplate(country.text);
+	textArr[textArr.length - 1] = annotationTemplate(country.data[legend.property][sampleCount - 1] + " - "+country.text);
 	country_graph.push(
 		{
 			name: "{0} - {1}".format(country.text, legend.text),

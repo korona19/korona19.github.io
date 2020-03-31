@@ -76,11 +76,22 @@ function AppendLegendOptions() {
 function GetCountryGraphData(country, color) {
 	var country_graph = [];
 	var data_x = [];
+	textArr = [];
 	let legend = legendOptions[selectedLegend]
 	var sampleCount = country.data[legend.property].length;
+	let annotationTemplate = (text) =>"<span class='font-weight-bold' style='padding-left:5px;color:{0};'>{1}</span>"
+		    .format(colorPalette[country.text],text);
 	if (mergeOrigin == true) {
 		for (var i = 1; i <= sampleCount; i++) {
 			data_x.push(i);
+			if (i % 5 == 0)
+			{
+				textArr.push(annotationTemplate(country.data[legend.property][i]));
+			}
+			else
+			{
+				textArr.push("");
+			}			
 		}
 	}
 	else {
@@ -88,8 +99,17 @@ function GetCountryGraphData(country, color) {
 			var newDate = new Date(country.startDate);
 			newDate.setDate(country.startDate.getDate() + i);
 			data_x.push(newDate);
+			if (i % 5 == 0)
+			{
+				textArr.push(annotationTemplate(country.data[legend.property][i]));
+			}
+			else
+			{
+				textArr.push("");
+			}
 		}
 	}
+	textArr[textArr.length - 1] = annotationTemplate(country.text);
 	country_graph.push(
 		{
 			name: "{0} - {1}".format(country.text, legend.text),
@@ -99,7 +119,10 @@ function GetCountryGraphData(country, color) {
 				color: colorPalette[country.text],
 			},
 			x: data_x,
-			y: country.data[legend.property].slice(0, sampleCount)
+			y: country.data[legend.property].slice(0, sampleCount),
+			mode: 'lines+text',
+			text:textArr,
+			textposition: "top left",
 		}
 	);
 	return country_graph;
@@ -145,7 +168,7 @@ function DisplayGraph() {
 		delete layout.xaxis.tickformat
 	}
 	Plotly.newPlot('totalGraph', graph_data, layout, { responsive: true, displaylogo: false });
-	layout.title = "COVID 19 Speed Graph";
+	layout.title = "";
 }
 
 function SelectedBoxFormat(state) {

@@ -13,6 +13,20 @@ var legendOptions = [
 	{ text: "Total Death/Total Case", property: "deathRate", plotType: "scatter" }
 ];
 var selectedLegend = 0;
+var selectedCountry = "Turkey";
+var displayAsImage = window.location.search.substr(1) != "";
+
+function GetParameter(name, def)
+{
+    let result = def;
+    window.location.search.substr(1)
+    .split("&")
+    .forEach((item)=>{
+        let tmp = item.split("=");
+        if(tmp[0] == name) result = decodeURIComponent(tmp[1]);
+    });
+    return result;
+}
 
 String.prototype.format = function () {
 	var formatted = this;
@@ -29,6 +43,10 @@ $(document).ready(function () {
 
 
 function main() {
+	selectedLegend = GetParameter("graph", 0);
+	selectedCountry = GetParameter("country", "Turkey");
+	
+	
 	AppendLegendOptions();
 	$('#countries').select2({
 		placeholder: "Select Country",
@@ -40,7 +58,7 @@ function main() {
 	$('#countries').on('select2:close', function (e) {
 		DisplayGraph();
 	});
-	$('#countries').val('Turkey').trigger('change'); // Notify any JS components that the value changed
+	$('#countries').val(selectedCountry).trigger('change'); // Notify any JS components that the value changed
 	$("#mergeOrigin").click(() => {
 		mergeOrigin = !mergeOrigin;
 		if (mergeOrigin) {
@@ -167,8 +185,23 @@ function DisplayGraph() {
 	if (mergeOrigin == true) {
 		delete layout.xaxis.tickformat
 	}
-	Plotly.newPlot('totalGraph', graph_data, layout, { responsive: true, displaylogo: false });
-	layout.title = "";
+	Plotly.newPlot('totalGraph', graph_data, layout, { responsive: true, displaylogo: false }).then(
+    function(gd)
+     {
+		 if (displayAsImage == true)
+		 {
+      Plotly.toImage(gd,{width:1024, height:768})
+         .then(
+             function(url)
+         {
+			 $("body").text("");
+			 $("body").append("<img src=\"{0}\"></img>".format(url));
+         }
+         )			 
+			 
+		 }
+
+    });
 }
 
 function SelectedBoxFormat(state) {

@@ -42,7 +42,8 @@ $(document).ready(function () {
 
 function main() {
 	selectedLegend = GetParameter("graph", 0);
-	selectedCountry = GetParameter("country", "Turkey");
+	selectedCountry = GetParameter("country", 'USA,Italy,China');
+	selectedCountry = selectedCountry.split(",");
 
 
 	AppendLegendOptions();
@@ -56,7 +57,7 @@ function main() {
 	$('#countries').on('select2:close', function (e) {
 		DisplayGraph();
 	});
-	$('#countries').val(selectedCountry).trigger('change'); // Notify any JS components that the value changed
+	$('#countries').val(selectedCountry).trigger('change');
 	$("#mergeOrigin").click(() => {
 		mergeOrigin = !mergeOrigin;
 		if (mergeOrigin) {
@@ -73,10 +74,12 @@ function main() {
 		}
 		DisplayGraph();
 	});
+	$("#plotLegend").val(selectedLegend);
 	$("#plotLegend").change(() => {
 		selectedLegend = parseInt($("#plotLegend").val());
 		DisplayGraph();
 	});
+	
 	DisplayGraph();
 }
 

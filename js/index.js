@@ -35,9 +35,6 @@ String.prototype.format = function () {
 	return formatted;
 };
 
-$(document).ready(function () {
-	main();
-});
 
 
 
@@ -214,3 +211,5 @@ function BoxFormat(state) {
 		.format(flagCodes[state.text], state.text));
 	return _state;
 }
+
+main();

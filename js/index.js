@@ -16,16 +16,15 @@ var selectedLegend = 0;
 var selectedCountry = "Turkey";
 var displayAsImage = window.location.search.substr(1) != "";
 
-function GetParameter(name, def)
-{
-    let result = def;
-    window.location.search.substr(1)
-    .split("&")
-    .forEach((item)=>{
-        let tmp = item.split("=");
-        if(tmp[0] == name) result = decodeURIComponent(tmp[1]);
-    });
-    return result;
+function GetParameter(name, def) {
+	let result = def;
+	window.location.search.substr(1)
+		.split("&")
+		.forEach((item) => {
+			let tmp = item.split("=");
+			if (tmp[0] == name) result = decodeURIComponent(tmp[1]);
+		});
+	return result;
 }
 
 String.prototype.format = function () {
@@ -45,8 +44,8 @@ $(document).ready(function () {
 function main() {
 	selectedLegend = GetParameter("graph", 0);
 	selectedCountry = GetParameter("country", "Turkey");
-	
-	
+
+
 	AppendLegendOptions();
 	$('#countries').select2({
 		placeholder: "Select Country",
@@ -97,19 +96,17 @@ function GetCountryGraphData(country, color) {
 	textArr = [];
 	let legend = legendOptions[selectedLegend]
 	var sampleCount = country.data[legend.property].length;
-	let annotationTemplate = (text) =>"<span class='font-weight-bold' style='padding-left:5px;color:{0};'>{1}</span>"
-		    .format(colorPalette[country.text],text);
+	let annotationTemplate = (text) => "<span class='font-weight-bold' style='padding-left:5px;color:{0};'>{1}</span>"
+		.format(colorPalette[country.text], text);
 	if (mergeOrigin == true) {
 		for (var i = 1; i <= sampleCount; i++) {
 			data_x.push(i);
-			if (i % 5 == 0 || i == sampleCount -1)
-			{
+			if (i % 5 == 0 || i == sampleCount - 1) {
 				textArr.push(annotationTemplate(country.data[legend.property][i]));
 			}
-			else
-			{
+			else {
 				textArr.push("");
-			}			
+			}
 		}
 	}
 	else {
@@ -117,17 +114,15 @@ function GetCountryGraphData(country, color) {
 			var newDate = new Date(country.startDate);
 			newDate.setDate(country.startDate.getDate() + i);
 			data_x.push(newDate);
-			if (i % 5 == 0 || i == sampleCount -1)
-			{
+			if (i % 5 == 0 || i == sampleCount - 1) {
 				textArr.push(annotationTemplate(country.data[legend.property][i]));
 			}
-			else
-			{
+			else {
 				textArr.push("");
 			}
 		}
 	}
-	textArr[textArr.length - 1] = annotationTemplate(country.data[legend.property][sampleCount - 1] + " - "+country.text);
+	textArr[textArr.length - 1] = annotationTemplate(country.data[legend.property][sampleCount - 1] + " - " + country.text);
 	country_graph.push(
 		{
 			name: "{0} - {1}".format(country.text, legend.text),
@@ -139,7 +134,7 @@ function GetCountryGraphData(country, color) {
 			x: data_x,
 			y: country.data[legend.property].slice(0, sampleCount),
 			mode: 'lines+text',
-			text:textArr,
+			text: textArr,
 			textposition: "top left",
 		}
 	);
@@ -186,23 +181,20 @@ function DisplayGraph() {
 		delete layout.xaxis.tickformat
 	}
 	Plotly.newPlot('totalGraph', graph_data, layout, { responsive: true, displaylogo: false }).then(
-    function(gd)
-     {
-		 if (displayAsImage == true)
-		 {
-      Plotly.toImage(gd,{width:1024, height:768})
-         .then(
-             function(url)
-         {
-			 $("body").text("");
-			 $("body").append("<img src=\"{0}\"></img>".format(url));
-			 $("head").append('<meta name = "twitter:image" id="twitter_image" content="{0}">'.format(window.location.href));
-         }
-         )			 
-			 
-		 }
+		function (gd) {
+			if (displayAsImage == true) {
+				Plotly.toImage(gd, { width: 1024, height: 768 })
+					.then(
+						function (url) {
+							$("body").text("");
+							$("body").append("<img src=\"{0}\"></img>".format(url));
+							$("head").append('<meta name = "twitter:image" id="twitter_image" content="{0}">'.format(window.location.href));
+						}
+					)
 
-    });
+			}
+
+		});
 }
 
 function SelectedBoxFormat(state) {
@@ -210,7 +202,7 @@ function SelectedBoxFormat(state) {
 		return state.text;
 	}
 	var _state = $("<span class='f32' style><span class='flag {0}' style='margin-top:-4px;height:28px;'></span><span class='font-weight-bold' style='padding-left:5px;color:{1};'>{2}</span></span>"
-				    .format(flagCodes[state.text],colorPalette[state.text],state.text));
+		.format(flagCodes[state.text], colorPalette[state.text], state.text));
 	return _state;
 }
 
@@ -219,6 +211,6 @@ function BoxFormat(state) {
 		return state.text;
 	}
 	var _state = $("<span class='f32' style><span class='flag {0}' style='margin-top:-4px;height:28px;'></span><span class='font-weight-bold' style='padding-left:5px;'>{1}</span></span>"
-				    .format(flagCodes[state.text],state.text));
+		.format(flagCodes[state.text], state.text));
 	return _state;
 }

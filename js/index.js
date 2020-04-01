@@ -14,7 +14,6 @@ var legendOptions = [
 ];
 var selectedLegend = 0;
 var selectedCountry = "Turkey";
-var displayAsImage = window.location.search.substr(1) != "";
 
 function GetParameter(name, def) {
 	let result = def;
@@ -180,21 +179,7 @@ function DisplayGraph() {
 	if (mergeOrigin == true) {
 		delete layout.xaxis.tickformat
 	}
-	Plotly.newPlot('totalGraph', graph_data, layout, { responsive: true, displaylogo: false }).then(
-		function (gd) {
-			if (displayAsImage == true) {
-				Plotly.toImage(gd, { width: 1024, height: 768 })
-					.then(
-						function (url) {
-							$("body").text("");
-							$("body").append("<img src=\"{0}\"></img>".format(url));
-							$("head").append('<meta name = "twitter:image" id="twitter_image" content="{0}">'.format(window.location.href));
-						}
-					)
-
-			}
-
-		});
+	Plotly.newPlot('totalGraph', graph_data, layout, { responsive: true, displaylogo: false })
 }
 
 function SelectedBoxFormat(state) {

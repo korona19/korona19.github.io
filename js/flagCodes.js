@@ -273,13 +273,13 @@ var colorPalette = {
 	"Netherlands":"#B34E00",
 	"Philippines":"#FD84FD",
 	"Poland":"#766876",
-	"Portugal":"#A8FFA8",
+	"Portugal":"#009933",
 	"Spain":"#B95B09",
 	"Sweden":"#0E9451",
 	"Switzerland":"#724D56",
 	"Turkey":"#B80C00",
-	"England":"#0745D5",
-	"USA":"#FF0044",
+	"England":"#862D86",
+	"USA":"#000000",
 };
 
 var population = {

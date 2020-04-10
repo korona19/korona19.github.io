@@ -39,19 +39,24 @@
         </div>
         <form>
             <div class="row" style="margin:0px;margin-top: 20px;">
-                <div class="col-md-10 col-sm-10 col-10 mx-auto d-flex justify-content-center">
-                    <div class="col-md-6 col-sm-6 col-6">
+                <div class="col-md-12 mx-auto d-flex justify-content-center">
+                    <div class="col-md-9 col-sm-9 col-9">
                         <select id="countries" multiple="multiple"></select>
                     </div>
-                    <div class="col-md-2 col-sm-2 col-2">
+                </div>
+            </div>
+			<div class ="row col-md-12 mx-auto d-flex justify-content-center" style ="margin-top:5px !important;">
+			                    <div class="col-md-2 col-sm-2 col-2">
                         <select id="plotLegend" class="custom-select custom-select-md mb-3" style="min-width: 100px;">
                           </select>
                     </div>
                     <div class="col-md-1 col-sm-1 col-1">
                         <button type="button" id="mergeOrigin" class="btn btn-primary col-md-12" style="min-width: 80px;">Merge</button>
                     </div>
-                </div>
-            </div>
+					<div class="col-md-1 col-sm-1 col-1">
+                        <button type="button" id="populationPercentage" class="btn btn-primary col-md-12" style="min-width: 80px;">%Population</button>
+                    </div>
+			</div>
         </form>
         <div class="row col-md-10 col-sm-10 col-10 mx-auto d-flex justify-content-center">
             <div id='totalGraph' class="col-md-12 col-sm-12 col-12"></div>

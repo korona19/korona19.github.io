@@ -3,14 +3,15 @@ countryList.sort((a, b) => {
 });
 var displayingData = [];
 var mergeOrigin = false;
+var populationPercentage = false;
 var legendOptions = [
-	{ text: "Total Case", property: "totalCase", plotType: "scatter" },
-	{ text: "Total Death", property: "totalDeath", plotType: "scatter" },
-	{ text: "New Case", property: "newCase", plotType: "bar" },
-	{ text: "New Death", property: "newDeath", plotType: "bar" },
-	{ text: "Daily Case Increase Ratio", property: "increaseRate", plotType: "bar" },
-	{ text: "Case Increase Change Ratio", property: "accRate", plotType: "bar" },
-	{ text: "Total Death/Total Case", property: "deathRate", plotType: "scatter" }
+	{ text: "Total Case", property: "totalCase", plotType: "scatter", population:true },
+	{ text: "Total Death", property: "totalDeath", plotType: "scatter", population:true },
+	{ text: "New Case", property: "newCase", plotType: "bar", population:true },
+	{ text: "New Death", property: "newDeath", plotType: "bar", population:true },
+	{ text: "Daily Case Increase Ratio", property: "increaseRate", plotType: "bar", population:false },
+	{ text: "Case Increase Change Ratio", property: "accRate", plotType: "bar", population:false },
+	{ text: "Total Death/Total Case", property: "deathRate", plotType: "scatter", population:false }
 ];
 var selectedLegend = 0;
 var selectedCountry = "Turkey";
@@ -74,6 +75,21 @@ function main() {
 		}
 		DisplayGraph();
 	});
+	$("#populationPercentage").click(() => {
+		populationPercentage = !populationPercentage;
+		if (populationPercentage) {
+			$("#populationPercentage").removeClass("btn-primary");
+			$("#populationPercentage").addClass("btn-danger");
+			$("#populationPercentage").html("Cancel");
+		}
+		else {
+			$("#populationPercentage").addClass("btn-primary");
+			$("#populationPercentage").removeClass("btn-danger");
+			$("#populationPercentage").html("%Population");
+		}
+		DisplayGraph();
+	});
+	
 	$("#plotLegend").val(selectedLegend);
 	$("#plotLegend").change(() => {
 		selectedLegend = parseInt($("#plotLegend").val());
@@ -94,17 +110,67 @@ function AppendLegendOptions() {
 
 function GetCountryGraphData(country, color) {
 	var country_graph = [];
-	var data_x = [];
-	textArr = [];
 	let legend = legendOptions[selectedLegend]
-	var sampleCount = country.data[legend.property].length;
-	let annotationTemplate = (text) => "<span class='font-weight-bold' style='padding-left:5px;color:{0};'>{1}</span>"
-		.format(colorPalette[country.text], text);
+	var data_x = [];
+	var data_y = country.data[legend.property];
+	textArr = [];
+	var sampleCount = data_y.length;
+	
+	if (populationPercentage == true && legend.population == true )
+	{
+		
+		data_y = data_y.map((x)=>{ 
+									return ((x / countryPopulation[country.text]) *100);
+									}
+									);		
+	}
+	let annotationTemplate = (value, index) => {
+		let result = "";
+		if (populationPercentage == true && legend.population == true )
+		{
+			if (index == sampleCount - 1)
+			{
+				result = "<span class='font-weight-bold' style='padding-left:5px;color:{0};'>{1}% - {2}</span>"
+					.format(colorPalette[country.text], value.toFixed(2),country.text);				
+				
+			}
+			else
+			{
+				result = "<span class='font-weight-bold' style='padding-left:5px;color:{0};'>{1}%</span>"
+					.format(colorPalette[country.text], value.toFixed(2));
+				
+			}
+
+			
+		}
+		else
+		{
+			if (index == sampleCount - 1)
+			{
+				result = "<span class='font-weight-bold' style='padding-left:5px;color:{0};'>{1}% - {2}</span>"
+					.format(colorPalette[country.text], value, country.text);				
+				
+			}
+			else
+			{
+				
+			
+				result = "<span class='font-weight-bold' style='padding-left:5px;color:{0};'>{1}</span>"
+				.format(colorPalette[country.text], value);
+			}
+		}
+		return result;
+		
+		
+		}
+		
+		
+		
 	if (mergeOrigin == true) {
 		for (var i = 1; i <= sampleCount; i++) {
 			data_x.push(i);
 			if (i % 5 == 0 || i == sampleCount - 1) {
-				textArr.push(annotationTemplate(country.data[legend.property][i]));
+				textArr.push(annotationTemplate(data_y[i], i));
 			}
 			else {
 				textArr.push("");
@@ -117,14 +183,13 @@ function GetCountryGraphData(country, color) {
 			newDate.setDate(country.startDate.getDate() + i);
 			data_x.push(newDate);
 			if (i % 5 == 0 || i == sampleCount - 1) {
-				textArr.push(annotationTemplate(country.data[legend.property][i]));
+				textArr.push(annotationTemplate(data_y[i], i));
 			}
 			else {
 				textArr.push("");
 			}
 		}
 	}
-	textArr[textArr.length - 1] = annotationTemplate(country.data[legend.property][sampleCount - 1] + " - " + country.text);
 	country_graph.push(
 		{
 			name: "{0} - {1}".format(country.text, legend.text),
@@ -134,7 +199,7 @@ function GetCountryGraphData(country, color) {
 				color: colorPalette[country.text],
 			},
 			x: data_x,
-			y: country.data[legend.property].slice(0, sampleCount),
+			y: data_y.slice(0, sampleCount),
 			mode: 'lines+text',
 			text: textArr,
 			textposition: "top left",

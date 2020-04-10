@@ -147,7 +147,7 @@ function GetCountryGraphData(country, color) {
 		{
 			if (index == sampleCount - 1)
 			{
-				result = "<span class='font-weight-bold' style='padding-left:5px;color:{0};'>{1}% - {2}</span>"
+				result = "<span class='font-weight-bold' style='padding-left:5px;color:{0};'>{1} - {2}</span>"
 					.format(colorPalette[country.text], value, country.text);				
 				
 			}

@@ -125,50 +125,24 @@ function GetCountryGraphData(country, color) {
 									);		
 	}
 	let annotationTemplate = (value, index) => {
-		let result = "";
 		if (populationPercentage == true && legend.population == true )
 		{
-			if (index == sampleCount - 1)
-			{
-				result = "<span class='font-weight-bold' style='padding-left:5px;color:{0};'>{1}% - {2}</span>"
-					.format(colorPalette[country.text], value.toFixed(2),country.text);				
-				
-			}
-			else
-			{
-				result = "<span class='font-weight-bold' style='padding-left:5px;color:{0};'>{1}%</span>"
-					.format(colorPalette[country.text], value.toFixed(2));
-				
-			}
-
-			
+			value = parseFloat(value).toFixed(2) + " %";
 		}
-		else
+		if (index == sampleCount - 1)
 		{
-			if (index == sampleCount - 1)
-			{
-				result = "<span class='font-weight-bold' style='padding-left:5px;color:{0};'>{1} - {2}</span>"
-					.format(colorPalette[country.text], value, country.text);				
-				
-			}
-			else
-			{
-				
-			
-				result = "<span class='font-weight-bold' style='padding-left:5px;color:{0};'>{1}</span>"
-				.format(colorPalette[country.text], value);
-			}
+			value = value +" - " + country.text;
 		}
-		return result;
-		
-		
+		return "<span class='font-weight-bold' style='padding-left:5px;color:{0};'>{1}</span>"
+					.format(colorPalette[country.text], value);				
+				
 		}
 		
 		
 		
 	if (mergeOrigin == true) {
-		for (var i = 1; i <= sampleCount; i++) {
-			data_x.push(i);
+		for (var i = 0; i < sampleCount; i++) {
+			data_x.push(i + 1);
 			if (i % 5 == 0 || i == sampleCount - 1) {
 				textArr.push(annotationTemplate(data_y[i], i));
 			}

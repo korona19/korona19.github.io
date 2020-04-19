@@ -43,7 +43,7 @@ $(document).ready(function () {
 
 function main() {
 	selectedLegend = GetParameter("graph", 0);
-	selectedCountry = GetParameter("country", 'USA,Italy,China');
+	selectedCountry = GetParameter("country", 'England,France,Germany,Italy,Turkey');
 	selectedCountry = selectedCountry.split(",");
 
 
@@ -89,13 +89,13 @@ function main() {
 		}
 		DisplayGraph();
 	});
-	
+
 	$("#plotLegend").val(selectedLegend);
 	$("#plotLegend").change(() => {
 		selectedLegend = parseInt($("#plotLegend").val());
 		DisplayGraph();
 	});
-	
+
 	DisplayGraph();
 }
 
@@ -115,14 +115,14 @@ function GetCountryGraphData(country, color) {
 	var data_y = country.data[legend.property];
 	textArr = [];
 	var sampleCount = data_y.length;
-	
+
 	if (populationPercentage == true && legend.population == true )
 	{
-		
-		data_y = data_y.map((x)=>{ 
+
+		data_y = data_y.map((x)=>{
 									return ((x / countryPopulation[country.text]) *100);
 									}
-									);		
+									);
 	}
 	let annotationTemplate = (value, index) => {
 		if (populationPercentage == true && legend.population == true )
@@ -134,12 +134,12 @@ function GetCountryGraphData(country, color) {
 			value = value +" - " + country.text;
 		}
 		return "<span class='font-weight-bold' style='padding-left:5px;color:{0};'>{1}</span>"
-					.format(colorPalette[country.text], value);				
-				
+					.format(colorPalette[country.text], value);
+
 		}
-		
-		
-		
+
+
+
 	if (mergeOrigin == true) {
 		for (var i = 0; i < sampleCount; i++) {
 			data_x.push(i + 1);

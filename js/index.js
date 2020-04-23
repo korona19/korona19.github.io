@@ -95,7 +95,7 @@ function main() {
 		selectedLegend = parseInt($("#plotLegend").val());
 		DisplayGraph();
 	});
-
+	$("#mergeOrigin").click();
 	DisplayGraph();
 }
 
